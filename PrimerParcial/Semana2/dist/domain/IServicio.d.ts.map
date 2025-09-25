@@ -1,0 +1,1 @@
+{"version":3,"file":"IServicio.d.ts","sourceRoot":"","sources":["../../src/domain/IServicio.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,OAAO,WAAW,SAAS;IAC9B,EAAE,EAAE,MAAM,CAAC;IACX,MAAM,EAAE,MAAM,CAAC;IACf,MAAM,EAAE,MAAM,CAAC;IACf,WAAW,EAAE,MAAM,CAAC;CACvB"}

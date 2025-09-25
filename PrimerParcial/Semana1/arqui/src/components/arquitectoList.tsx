@@ -1,6 +1,6 @@
 import type { Arquitecto } from '../interfaces/arquitecto';
 import { useEffect, useState } from "react";
-import ArquitectoCard from './ArquitectoCard';
+import ArquitectoCard from './arquitectoCard';
 
 function ArquitectoList() {
   const [arquitectos, setArquitectos] = useState<Arquitecto[]>([]);
