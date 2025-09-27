@@ -1,1 +1,0 @@
-{"version":3,"file":"IMascota.d.ts","sourceRoot":"","sources":["../../src/domain/IMascota.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,QAAQ,MAAM,YAAY,CAAC;AAEvC,MAAM,CAAC,OAAO,WAAW,QAAQ;IAC7B,EAAE,EAAE,MAAM,CAAC;IACX,MAAM,EAAE,MAAM,CAAC;IACf,IAAI,EAAE,MAAM,CAAC;IACb,IAAI,EAAE,MAAM,CAAC;IACb,OAAO,EAAE,QAAQ,CAAA;CACpB"}
