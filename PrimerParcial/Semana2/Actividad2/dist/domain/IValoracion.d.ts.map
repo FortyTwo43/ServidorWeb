@@ -1,0 +1,1 @@
+{"version":3,"file":"IValoracion.d.ts","sourceRoot":"","sources":["../../src/domain/IValoracion.ts"],"names":[],"mappings":"AACA,MAAM,CAAC,OAAO,WAAW,WAAW;IAChC,aAAa,EAAE,MAAM,CAAC;IACtB,UAAU,EAAE,MAAM,CAAC;IACnB,UAAU,EAAE,MAAM,CAAC;IACnB,YAAY,EAAE,MAAM,CAAC;IACrB,UAAU,EAAE,MAAM,CAAC;IACnB,KAAK,EAAE,IAAI,CAAC;CACf"}
