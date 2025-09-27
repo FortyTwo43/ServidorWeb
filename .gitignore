@@ -1,8 +1,10 @@
 # Dependencias
 node_modules/
-
+*/node_modules
 # Build / compilados
+*/dist
 dist/
+*/build
 build/
 
 # Archivos temporales
