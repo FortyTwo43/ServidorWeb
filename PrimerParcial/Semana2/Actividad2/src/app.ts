@@ -4,6 +4,7 @@ import { servicioValoracion } from "./service/ValoracionServicio"
 import IValoracion from "./domain/IValoracion";
 import ICliente from "./domain/ICliente";
 import { ServicioCliente } from "./service/ClienteServicio";
+import { ClienteRepository } from "./Repository/ClienteRepository";
 
 
 // Hecho por Leo Holguin
@@ -53,19 +54,23 @@ CRUDValoracion.updateValoracion("1", { ...nueva, comentario: "Muy bueno" })
 
 
 // Hecho por Neysser Delgado
-const servicioCliente = new ServicioCliente;
+import { registroClientes } from "./Repository/registrosClientes";
+
+const repoCliente = new ClienteRepository();
+const servicioCliente = new ServicioCliente(repoCliente);
+
 const nuevo_cliente: ICliente = {
-    id_cliente: "C0001",
+    id_cliente: "C0011",
     usuario: {
-        id_usuario: "U0001",
-        nombre: "Juan Garcia",
-        email: "juan123@gmail.com",
+        id_usuario: "U0011",
+        nombre: "Ricardo Varela",
+        email: "ricardo.varela@gmail.com",
         rol: "cliente",
         estado: "activo",
         password: "contrasenasegura",
         fechaRegistro: new Date(),
     }
-}
+};
 
 // Create con callbacks
 servicioCliente.create(nuevo_cliente, (error: any, cliente: ICliente)=>{
@@ -75,6 +80,7 @@ servicioCliente.create(nuevo_cliente, (error: any, cliente: ICliente)=>{
         console.log("Cliente insertado: ", cliente);
     }
 });
+
 
 // Update con promise y encadenamiento con .then() y. catch()
 servicioCliente.update("C0001",{
@@ -119,9 +125,8 @@ leerClientes();
 // Delete con async/await
 async function eliminarCliente(id: string) {
     const eliminado: boolean = await servicioCliente.delete(id);
-
     if(eliminado){
-        console.log("Cliente eliminado");
+        console.log("Cliente fue eliminado");
     }else{
         console.error("Error: Cliente no fue eliminado");
     }

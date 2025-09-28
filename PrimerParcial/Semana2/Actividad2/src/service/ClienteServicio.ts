@@ -1,94 +1,55 @@
-//Hecho por Neysser Delgado
 import ICliente from "../domain/ICliente";
+import { ClienteRepository } from "../Repository/ClienteRepository";
 
-const clientes: ICliente[] = [];
+export class ServicioCliente {
+    private repo: ClienteRepository;
 
-export class ServicioCliente{
-    constructor(){
-        console.log("Servicio de Cliente creado");
+    constructor(repo: ClienteRepository) {
+        this.repo = repo;
     }
 
-    // create con Callbacks
-    create(cliente: ICliente, callback: CallableFunction): void{
-        // validación de datos
-        // Verificar si el cliente ya existe
-        const clienteExiste = clientes.find((c)=>c.id_cliente === cliente.id_cliente);
-        if(clienteExiste){
-            return callback(new Error("Ya existe un cliente con ese id"), null); // si sale man
-        }
-
-        setTimeout(()=>{ // simulacion de latencia de red
-            try{
-                clientes.push(cliente);
-                callback(null, cliente); // si sale bien
-            }catch(error){
-                callback(new Error("Error al incertar cliente"), null) // si sale mal
-            }
-        }, 1500);
+    // create usando el repo con callback
+    create(cliente: ICliente, callback: CallableFunction): void {
+        this.repo.create(cliente, callback);
     }
 
-    // update con promise
-    update(id: string, datos: ICliente): Promise<ICliente>{
-        return new Promise((resolve, reject)=>{
-            // simulacion de latencia
-            setTimeout(()=>{
-                // Validar que si exista ese cliente 
-                const clienteIndex = clientes.findIndex((c)=>c.id_cliente===id);
-                if(clienteIndex===-1){
-                    return reject(new Error("Cliente no encontrado"));
-                }
-                
-                clientes[clienteIndex] = datos;
-                resolve(datos);
-                }, 1500);
-        });
+    // update usando el repo con promise
+    update(id: string, datos: ICliente): Promise<ICliente> {
+        return this.repo.update(id, datos)
+        // .then((clienteActualizado)=>{
+        //     console.log("Cliente Actualizado correctamente")
+        //     return clienteActualizado;
+        // })
+        // .catch((error)=>{
+        //     console.error("Error al actualizar cliente: ", error.message);
+        //     throw error;
+        // })
     }
 
-    // read con Async/Await
-    async read(): Promise<ICliente[]>{
-        try{
-            // esto es para simular una operación de asincronia
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            return clientes;
-        }catch(error){
+    // read listado completo con async/await
+    async read(): Promise<ICliente[]> {
+        try {
+            return await this.repo.read();
+        } catch (error) {
             throw error;
         }
     }
 
-    async readById(id: string): Promise<ICliente>{
-        try{
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            const cliente = clientes.find((c)=>c.id_cliente===id);
-            if(!cliente){
-                console.log(cliente);
-                throw new Error("Usuario no encontrado");
-            }
-            return cliente;
-        }catch(error){
+    // read individual con async/await
+    async readById(id: string): Promise<ICliente> {
+        try {
+            return await this.repo.readById(id);
+        } catch (error) {
             throw error;
         }
     }
 
-
-    // delete con Async/Await
-    async delete(id: string): Promise<boolean>{
-        try{
-            // simular latencia
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            
-            const clienteIndex = clientes.findIndex((c)=>c.id_cliente === id);
-            if(clienteIndex === -1){
-                console.error("Cliente no fue encontrado");
-                return false; // esto es para en caso de no encontrar el cliente
-            }
-
-            clientes.splice(clienteIndex, 1); // esto es una eliminacion fisica
-            console.log("Cliente eliminado");
-            return true; // true para cuando si encuentra y elimina
-        }catch(error){
-            console.error("Error al eliminar cliente: ", (error as Error).message);
-            return false; // en caso de salir mal
+    // delete con async/await
+    async delete(id: string): Promise<boolean> {
+        try {
+            return await this.repo.delete(id);
+        } catch (error) {
+            throw error;
         }
     }
-
 }
