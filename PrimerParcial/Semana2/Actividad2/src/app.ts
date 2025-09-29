@@ -5,6 +5,52 @@ import IValoracion from "./domain/IValoracion";
 import ICliente from "./domain/ICliente";
 import { ServicioCliente } from "./service/ClienteServicio";
 import { ClienteRepository } from "./Repository/ClienteRepository";
+import { ServicioVerificacion } from "./service/VerificarServicio";
+import type IVerificacion from "./domain/IVerificacion";
+
+// Hecho por Derlis
+const CRUDVerificacion = new ServicioVerificacion();
+
+const nuevaVerificacion: IVerificacion = {
+    id_verificacion: "V001",
+    id_arquitecto: "A001",
+    documentos_adjuntos: "documentos.pdf",
+    estado: "pendiente",
+    fecha_verificacion: new Date(),
+    id_moderador: "M001"
+};
+
+// CREATE con callback
+CRUDVerificacion.createVerificacion(
+    nuevaVerificacion, 
+    (err: Error | null, verificacion: IVerificacion | null) => {
+        if (err) console.error("Error al crear verificación:", err);
+        else console.log("Verificación creada:", verificacion);
+    }
+);
+// READ con async/await
+(async () => {
+    const todasVerificaciones = await CRUDVerificacion.readVerificaciones();
+    console.log("Todas las verificaciones:", todasVerificaciones);
+
+    const unaVerificacion = await CRUDVerificacion.readVerificacionById("V001");
+    console.log("Verificación buscada:", unaVerificacion);
+})();
+
+// UPDATE con Promise
+CRUDVerificacion.updateVerificacion("V001", { ...nuevaVerificacion, estado: "verificado" })
+    .then(actualizado => console.log("Verificación actualizada:", actualizado))
+    .catch(err => console.error("Error al actualizar:", err));
+
+// DELETE con async/await
+(async () => {
+    try {
+        const msg = await CRUDVerificacion.deleteVerificacion("V001");
+        console.log(msg);
+    } catch (err) {
+        console.error(err);
+    }
+})();
 
 // Hecho por Leo Holguin
 const CRUDValoracion = new servicioValoracion();
@@ -55,8 +101,6 @@ CRUDValoracion.updateValoracion("3", { comentario: "Muy bueno" })
 
 
 // Hecho por Neysser Delgado
-import { registroClientes } from "./Repository/registrosClientes";
-
 const repoCliente = new ClienteRepository();
 const servicioCliente = new ServicioCliente(repoCliente);
 
