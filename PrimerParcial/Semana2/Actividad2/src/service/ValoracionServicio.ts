@@ -1,6 +1,6 @@
 // hecho por Leo Holguin
 import type IValoracion from "../domain/IValoracion";
-import { registroValoraciones } from "../Repository/ValoracionRepository";
+import { registroValoraciones } from "../Repository/registroValoraciones";
 
 export class servicioValoracion {
     private valoracionesRepository: IValoracion[];
