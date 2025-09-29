@@ -6,12 +6,11 @@ import ICliente from "./domain/ICliente";
 import { ServicioCliente } from "./service/ClienteServicio";
 import { ClienteRepository } from "./Repository/ClienteRepository";
 
-
 // Hecho por Leo Holguin
 const CRUDValoracion = new servicioValoracion();
 
 const nueva: IValoracion = {
-    id_valoracion: "1",
+    id_valoracion: "4",
     id_cliente: "C001",
     id_usuario: "U123",
     calificacion: 5,
@@ -37,20 +36,22 @@ CRUDValoracion.createValoracion(nueva, (err: any, data: IValoracion) => {
     console.log("Valoración buscada:", una);
 })();
 
-// UPDATE con Promise
-CRUDValoracion.updateValoracion("1", { ...nueva, comentario: "Muy bueno" })
+// UPDATE con Promise (solo actualizamos el comentario)
+CRUDValoracion.updateValoracion("3", { comentario: "Muy bueno" })
     .then((actualizado) => console.log("Actualizado:", actualizado))
     .catch((err) => console.error("Error al actualizar:", err));
 
 // DELETE con async/await
 (async () => {
     try {
-        const msg = await CRUDValoracion.deleteValoracion("1");
+        const msg = await CRUDValoracion.deleteValoracion("4");
         console.log(msg);
+
     } catch (err) {
         console.error(err);
     }
 })();
+
 
 
 // Hecho por Neysser Delgado

@@ -1,18 +1,19 @@
 // hecho por Leo Holguin
 import type IValoracion from "../domain/IValoracion";
-
-
-const valoraciones: IValoracion[] = [];
+import { registroValoraciones } from "../Repository/ValoracionRepository";
 
 export class servicioValoracion {
+    private valoracionesRepository: IValoracion[];
+
     constructor() {
+        this.valoracionesRepository = registroValoraciones;
         console.log("CRUD de Valoraciones Iniciado");
     }
 
     // CREATE con Callback
     createValoracion(nuevaValoracion: IValoracion, callback: CallableFunction): void {
         try {
-            valoraciones.push(nuevaValoracion);
+            this.valoracionesRepository.push(nuevaValoracion);
             console.log("Valoración creada");
             callback(null, nuevaValoracion); // success
         } catch (error) {
@@ -25,7 +26,7 @@ export class servicioValoracion {
         return new Promise((resolve) => {
             setTimeout(() => {
                 console.log("Valoraciones consultadas");
-                resolve(valoraciones);
+                resolve(this.valoracionesRepository);
             }, 1000);
         });
     }
@@ -33,7 +34,7 @@ export class servicioValoracion {
     async readValoracionById(id: string): Promise<IValoracion | null> {
         return new Promise((resolve) => {
             setTimeout(() => {
-                const valoracion = valoraciones.find(v => v.id_valoracion === id);
+                const valoracion = this.valoracionesRepository.find(v => v.id_valoracion === id);
                 if (!valoracion) {
                     console.log("Valoración no encontrada");
                     return resolve(null);
@@ -44,35 +45,35 @@ export class servicioValoracion {
         });
     }
 
-    // UPDATE con Promise
-    updateValoracion(id: string, nuevaValoracion: IValoracion): Promise<IValoracion> {
+    // UPDATE con Promise (mantiene el id y actualiza solo campos)
+    updateValoracion(id: string, nuevaValoracion: Partial<IValoracion>): Promise<IValoracion> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                const index = valoraciones.findIndex(v => v.id_valoracion === id);
+                const index = this.valoracionesRepository.findIndex(v => v.id_valoracion === id);
                 if (index === -1) {
                     return reject("Valoración no encontrada");
                 }
-                valoraciones[index] = nuevaValoracion;
+
+                this.valoracionesRepository[index] = {
+                    ...this.valoracionesRepository[index],
+                    ...nuevaValoracion,
+                    id_valoracion: id
+                } as IValoracion; 
+
                 console.log("Valoración actualizada");
-                resolve(nuevaValoracion);
+                resolve(this.valoracionesRepository[index]!); 
             }, 1000);
         });
     }
 
-    // DELETE con async/await
+    // DELETE con async/await (más simple, sin Promise anidado)
     async deleteValoracion(id: string): Promise<string> {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                const index = valoraciones.findIndex(v => v.id_valoracion === id);
-                if (index === -1) {
-                    console.log("Valoración no encontrada");
-                    return reject("Valoración no encontrada");
-                }
-                valoraciones.splice(index, 1);
-                console.log("Valoración eliminada");
-                resolve("Valoración eliminada con éxito");
-            }, 1500);
-        });
+        const index = this.valoracionesRepository.findIndex(v => v.id_valoracion === id);
+        if (index === -1) {
+            throw new Error("Valoración no encontrada");
+        }
+        this.valoracionesRepository.splice(index, 1);
+        console.log("Valoración eliminada");
+        return "Valoración eliminada con éxito";
     }
 }
-
