@@ -18,7 +18,7 @@ export class Mensaje {
   contenido: string;
 
   @CreateDateColumn()
-  fecha_envio: Date;
+  fecha_envio: string;
 
   @Column({ default: false })
   leido: boolean;

@@ -11,7 +11,7 @@ export class Imagen {
   imagen_url: string;
 
   @Column()
-  fecha: Date;
+  fecha: string;
 
   //  Relación con Proyecto (obligatoria)
   @ManyToOne(() => Proyecto, proyecto => proyecto.imagenes, {

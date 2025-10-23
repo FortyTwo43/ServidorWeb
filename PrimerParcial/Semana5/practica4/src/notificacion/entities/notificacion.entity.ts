@@ -19,7 +19,7 @@ export class Notificacion {
   mensaje: string;
 
   @CreateDateColumn()
-  fecha: Date;
+  fecha: string;
 
   @Column({ default: false })
   leido: boolean;

@@ -36,5 +36,5 @@ export class Incidencia {
   estado: EstadoIncidencia;
 
   @CreateDateColumn()
-  fecha: Date;
+  fecha: string;
 }

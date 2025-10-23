@@ -1,5 +1,5 @@
 // Hecho por Neysser Delgado
-import { IsBoolean, IsDate, IsEmail, IsEmpty, isEmpty, IsNotEmpty, IsString, IsUrl, MaxLength } from 'class-validator';
+import { IsBoolean, IsDate, IsDateString, IsEmail, IsEmpty, isEmpty, IsNotEmpty, IsString, IsUrl, MaxLength } from 'class-validator';
 import { Usuario } from 'src/usuario/entities/usuario.entity';
 import { Conversacion } from 'src/conversacion/entities/conversacion.entity';
 
@@ -10,8 +10,8 @@ export class CreateMensajeDto {
     contenido: string;
 
     @IsNotEmpty()
-    @IsDate()
-    fecha_envio: Date;
+    @IsDateString()
+    fecha_envio: string;
 
     @IsNotEmpty()
     @IsBoolean()

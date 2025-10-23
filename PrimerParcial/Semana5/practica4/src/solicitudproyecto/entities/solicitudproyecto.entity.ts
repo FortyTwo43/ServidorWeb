@@ -12,7 +12,7 @@ export class SolicitudProyecto {
   estado: "pendiente" | "aceptado" | "rechazado";
 
   @Column()
-  fecha: Date;
+  fecha: string;
 
   @ManyToOne(() => Arquitecto, arquitecto => arquitecto.solicitudes, { eager: true })
   arquitecto: Arquitecto;

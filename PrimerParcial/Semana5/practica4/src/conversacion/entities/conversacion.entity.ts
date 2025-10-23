@@ -15,5 +15,5 @@ export class Conversacion {
   arquitecto: Arquitecto;
 
   @CreateDateColumn()
-  fecha: Date;
+  fecha: string;
 }

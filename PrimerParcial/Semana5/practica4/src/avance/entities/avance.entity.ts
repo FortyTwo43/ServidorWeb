@@ -12,7 +12,7 @@ export class Avance {
     descripcion: string;
 
     @CreateDateColumn()
-    fecha: Date;
+    fecha: string;
 
     @OneToOne(()=> Imagen, imagen => imagen.avance)
     imagen: Imagen;

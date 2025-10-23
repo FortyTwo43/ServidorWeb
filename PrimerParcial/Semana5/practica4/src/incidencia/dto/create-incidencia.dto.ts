@@ -1,7 +1,7 @@
 // Hecho por Neysser Delgado
 import { Usuario } from "src/usuario/entities/usuario.entity";
 import { Moderador } from "src/moderador/entities/moderador.entity";
-import { MaxLength, IsEmail, IsIn, IsNotEmpty, IsString, IsUrl, IsDate } from 'class-validator';
+import { MaxLength, IsEmail, IsIn, IsNotEmpty, IsString, IsUrl, IsDate, IsDateString } from 'class-validator';
 import { EstadoIncidencia } from "../entities/incidencia.entity";
 
 export class CreateIncidenciaDto {
@@ -20,7 +20,7 @@ export class CreateIncidenciaDto {
   @IsString()
   estado: EstadoIncidencia;
 
-  @IsDate()
+  @IsDateString()
   @IsNotEmpty()
-  fecha: Date;
+  fecha: string;
 }

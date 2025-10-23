@@ -37,7 +37,7 @@ export class Proyecto {
   tipo_proyecto: 'portafolio' | 'contratado';
 
   @Column()
-  fecha_publicacion: Date;
+  fecha_publicacion: string;
 
   @OneToMany(() => Avance, avance => avance.proyecto, { cascade: true })
   avances: Avance[];
