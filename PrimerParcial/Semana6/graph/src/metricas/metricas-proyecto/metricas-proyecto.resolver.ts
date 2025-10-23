@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int, ID } from '@nestjs/graphql';
 import { MetricasProyectoService } from './metricas-proyecto.service';
 import { MetricasProyecto } from './entities/metricas-proyecto.entity';
 import { CreateMetricasProyectoInput } from './dto/create-metricas-proyecto.input';
@@ -13,13 +13,13 @@ export class MetricasProyectoResolver {
     return this.metricasProyectoService.create(createMetricasProyectoInput);
   }
 
-  @Query(() => [MetricasProyecto], { name: 'metricasProyecto' })
+  @Query(() => [MetricasProyecto], { name: 'todosMetricasProyecto' })
   findAll() {
     return this.metricasProyectoService.findAll();
   }
 
   @Query(() => MetricasProyecto, { name: 'metricasProyecto' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  findOne(@Args('id', { type: () => ID }) id: string) {
     return this.metricasProyectoService.findOne(id);
   }
 
@@ -29,7 +29,7 @@ export class MetricasProyectoResolver {
   }
 
   @Mutation(() => MetricasProyecto)
-  removeMetricasProyecto(@Args('id', { type: () => Int }) id: number) {
+  removeMetricasProyecto(@Args('id', { type: () => ID }) id: string) {
     return this.metricasProyectoService.remove(id);
   }
 }

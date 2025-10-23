@@ -12,15 +12,15 @@ export class MetricasProyectoService {
     return `This action returns all metricasProyecto`;
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return `This action returns a #${id} metricasProyecto`;
   }
 
-  update(id: number, updateMetricasProyectoInput: UpdateMetricasProyectoInput) {
+  update(id: string, updateMetricasProyectoInput: UpdateMetricasProyectoInput) {
     return `This action updates a #${id} metricasProyecto`;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} metricasProyecto`;
   }
 }

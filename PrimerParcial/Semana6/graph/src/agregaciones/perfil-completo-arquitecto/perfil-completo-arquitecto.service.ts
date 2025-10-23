@@ -15,7 +15,7 @@ export class PerfilCompletoArquitectoService {
   async obtenerPerfilCompleto(arquitectoId: string): Promise<PerfilCompletoArquitecto> {
     try {
       // Obtener arquitecto
-      const arqData = await this.restClient.getArquitecto(`/arquitectos/${arquitectoId}`);
+      const arqData = await this.restClient.getArquitecto(`/${arquitectoId}`);
       const usuarioData = arqData.usuario ?? {};
 
       const arquitecto: ArquitectoType = {
