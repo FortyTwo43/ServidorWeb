@@ -21,8 +21,9 @@ export class BusquedaResolver {
     return this.busquedaService.buscarProyectos(filtros);
   }
 
-  @Query(() => [Conversacion], { description: 'Busca conversaciones con múltiples criterios' })
-  async buscarConversaciones(@Args('filtros') filtros: BuscarConversacionesInput) {
-    return this.busquedaService.buscarConversaciones(filtros);
+  @Query(() => [Conversacion])
+  async buscarConversaciones(@Args('filtros', { nullable: true }) filtros?: BuscarConversacionesInput) {
+    return this.busquedaService.buscarConversaciones(filtros ?? {});
   }
+
 }

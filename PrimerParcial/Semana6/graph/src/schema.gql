@@ -31,9 +31,9 @@ input BuscarArquitectosInput {
 }
 
 input BuscarConversacionesInput {
-  arquitectoId: ID!
-  despuesDe: String!
-  usuarioId: ID!
+  arquitectoId: ID
+  despuesDe: String
+  usuarioId: ID
 }
 
 input BuscarProyectosInput {
@@ -61,11 +61,6 @@ input CreateEstadisticaArquitectoInput {
   exampleField: Int!
 }
 
-input CreateKpisPlataformaInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
 input CreateMetricasProyectoInput {
   """Example field (placeholder)"""
   exampleField: Int!
@@ -85,48 +80,48 @@ type DashboardProyecto {
 
 type EstadisticasArquitecto {
   """ID del arquitecto"""
-  arquitecto_id: ID!
+  arquitecto_id: ID
 
   """Nombre completo del arquitecto"""
-  nombre_completo: String!
+  nombre_completo: String
 
   """Distribución de proyectos por tipo"""
-  proyectos_por_tipo: [ProyectosPorTipo!]!
+  proyectos_por_tipo: [ProyectosPorTipo!]
 
   """Total de proyectos realizados"""
-  total_proyectos: Int!
+  total_proyectos: Int
 
   """Total de valoraciones recibidas"""
-  total_valoraciones: Int!
+  total_valoraciones: Int
 
   """Valoración promedio del arquitecto"""
-  valoracion_promedio: Float!
+  valoracion_promedio: Float
 
   """Indica si el arquitecto está verificado"""
-  verificado: Boolean!
+  verificado: Boolean
 }
 
 type KPIsPlataforma {
   """Arquitectos con verificación activa"""
-  arquitectos_verificados: Int!
+  arquitectos_verificados: Int
 
   """Total de arquitectos registrados"""
-  total_arquitectos: Int!
+  total_arquitectos: Int
 
   """Total de clientes registrados"""
-  total_clientes: Int!
+  total_clientes: Int
 
   """Total de incidencias reportadas"""
-  total_incidencias: Int!
+  total_incidencias: Int
 
   """Total de proyectos en la plataforma"""
-  total_proyectos: Int!
+  total_proyectos: Int
 
   """Total de usuarios en la plataforma"""
-  total_usuarios: Int!
+  total_usuarios: Int
 
   """Distribución de usuarios por rol"""
-  usuarios_por_rol: [UsuariosPorRol!]!
+  usuarios_por_rol: [UsuariosPorRol!]
 }
 
 type MetricasProyecto {
@@ -134,33 +129,30 @@ type MetricasProyecto {
   dias_transcurridos: Int
 
   """Estado actual del proyecto"""
-  estado: String!
+  estado: String
 
   """ID del proyecto"""
-  proyecto_id: ID!
+  proyecto_id: ID
 
   """Título del proyecto"""
-  titulo: String!
+  titulo: String
 
   """Total de avances registrados en el proyecto"""
-  total_avances: Int!
+  total_avances: Int
 
   """Total de valoraciones recibidas"""
-  total_valoraciones: Int!
+  total_valoraciones: Int
 
   """Valoración promedio del proyecto"""
-  valoracion_promedio: Float!
+  valoracion_promedio: Float
 }
 
 type Mutation {
   createEstadisticaArquitecto(createEstadisticaArquitectoInput: CreateEstadisticaArquitectoInput!): EstadisticasArquitecto!
-  createKpisPlataforma(createKpisPlataformaInput: CreateKpisPlataformaInput!): KPIsPlataforma!
   createMetricasProyecto(createMetricasProyectoInput: CreateMetricasProyectoInput!): MetricasProyecto!
   removeEstadisticaArquitecto(id: Int!): EstadisticasArquitecto!
-  removeKpisPlataforma(id: Int!): KPIsPlataforma!
-  removeMetricasProyecto(id: Int!): MetricasProyecto!
+  removeMetricasProyecto(id: ID!): MetricasProyecto!
   updateEstadisticaArquitecto(updateEstadisticaArquitectoInput: UpdateEstadisticaArquitectoInput!): EstadisticasArquitecto!
-  updateKpisPlataforma(updateKpisPlataformaInput: UpdateKpisPlataformaInput!): KPIsPlataforma!
   updateMetricasProyecto(updateMetricasProyectoInput: UpdateMetricasProyectoInput!): MetricasProyecto!
 }
 
@@ -189,29 +181,25 @@ type ProyectoType {
 
 type ProyectosPorTipo {
   """Cantidad de proyectos de este tipo"""
-  cantidad: Int!
+  cantidad: Int
 
   """Tipo de proyecto"""
-  tipo: String!
+  tipo: String
 }
 
 type Query {
   """Busca arquitectos según filtros"""
   buscarArquitectos(filtros: BuscarArquitectosInput!): [ArquitectoType!]!
-
-  """Busca conversaciones con múltiples criterios"""
-  buscarConversaciones(filtros: BuscarConversacionesInput!): [Conversacion!]!
+  buscarConversaciones(filtros: BuscarConversacionesInput): [Conversacion!]!
 
   """Busca proyectos con condiciones avanzadas"""
   buscarProyectos(filtros: BuscarProyectosInput!): [ProyectoType!]!
   dashboardProyecto(proyectoId: ID!): DashboardProyecto!
   estadisticaArquitecto(id: Int!): EstadisticasArquitecto!
-
-  """Obtiene estadísticas completas de un arquitecto específico"""
-  estadisticasArquitecto(arquitectoId: ID!): EstadisticasArquitecto
-  kpisPlataforma(id: Int!): KPIsPlataforma!
-  metricasProyecto(id: Int!): MetricasProyecto!
+  kpisPlataforma: KPIsPlataforma!
+  metricasProyecto(id: ID!): MetricasProyecto!
   perfilCompletoArquitecto(arquitectoId: String!): PerfilCompletoArquitecto!
+  todosMetricasProyecto: [MetricasProyecto!]!
 }
 
 input UpdateEstadisticaArquitectoInput {
@@ -220,16 +208,10 @@ input UpdateEstadisticaArquitectoInput {
   id: Int!
 }
 
-input UpdateKpisPlataformaInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
-}
-
 input UpdateMetricasProyectoInput {
   """Example field (placeholder)"""
   exampleField: Int
-  id: Int!
+  id: ID!
 }
 
 type UsuarioType {
@@ -247,10 +229,10 @@ type UsuarioType {
 
 type UsuariosPorRol {
   """Cantidad de usuarios con este rol"""
-  cantidad: Int!
+  cantidad: Int
 
   """Rol del usuario"""
-  rol: String!
+  rol: String
 }
 
 type ValoracionType {

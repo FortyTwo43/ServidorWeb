@@ -5,11 +5,14 @@ import { HttpModule } from '@nestjs/axios';
 import { join } from 'path';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver } from '@nestjs/apollo';
-import { MetricasModule } from './metricas/metricas.module';
+
 import { DashboardProyectoModule } from './agregaciones/dashboard-proyecto/dashboard-proyecto.module';
 import { BusquedaModule } from './busquedas/busquedas.module';
 import { PerfilCompletoArquitectoModule } from './agregaciones/perfil-completo-arquitecto/perfil-completo-arquitecto.module';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
+import { EstadisticaArquitectoModule } from './metricas/estadistica-arquitecto/estadistica-arquitecto.module';
+import { KpisPlataformaModule } from './metricas/kpis-plataforma/kpis-plataforma.module';
+import { MetricasProyectoModule } from './metricas/metricas-proyecto/metricas-proyecto.module';
 
 @Module({
   imports: [
@@ -26,7 +29,9 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
     maxRedirects: 5,
     }),
     DashboardProyectoModule,
-    MetricasModule,
+    EstadisticaArquitectoModule,
+    KpisPlataformaModule,
+    MetricasProyectoModule,
     PerfilCompletoArquitectoModule,
     BusquedaModule,
     // Aquí se importarán los módulos de resolver
@@ -47,4 +52,4 @@ export class AppModule {}
 // conversacion ----
 // mensaje ---
 // avance ----
-// valoracion ----
+// valoracion ---- '
