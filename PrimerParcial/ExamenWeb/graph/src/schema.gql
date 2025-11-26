@@ -1,0 +1,116 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Cobertura {
+  activa: Boolean!
+  condiciones: String!
+  deducible: Int!
+  descripcion: String!
+  fechaActualizacion: String!
+  fechaCreacion: String!
+  id: String!
+  monto: Int!
+  tipoCobertura: String!
+  tipoSeguro: String!
+}
+
+type Conductor {
+  aniosExperiencia: Int!
+  apellido: String!
+  correoElectronico: String!
+  direccion: String!
+  documentoIdentidad: String!
+  fechaActualizacion: String!
+  fechaCreacion: String!
+  fechaNacimiento: String!
+  id: String!
+  nombre: String!
+  numeroLicencia: String!
+  telefono: String!
+}
+
+type Cotizacion {
+  coberturaId: String!
+  conductorId: String!
+  estado: String!
+  fechaActualizacion: String!
+  fechaCreacion: String!
+  fechaFin: String!
+  fechaInicio: String!
+  fechaVencimiento: String!
+  id: String!
+  montoTotal: Int!
+  observaciones: String!
+  prima: Int!
+  vehiculoId: String!
+}
+
+type Query {
+  """Obtiene coberturas por tipo"""
+  cobertuasPorTipo(tipo: String!): [Cobertura!]!
+
+  """Obtiene una cobertura por ID"""
+  cobertura(id: String!): Cobertura
+
+  """Obtiene todas las coberturas"""
+  coberturas: [Cobertura!]!
+
+  """Obtiene coberturas activas"""
+  coberturasActivas: [Cobertura!]!
+
+  """Obtiene un conductor por ID"""
+  conductor(id: String!): Conductor
+
+  """Obtiene todos los conductores"""
+  conductores: [Conductor!]!
+
+  """Obtiene conductores con mínimo de años de experiencia"""
+  conductoresConExperiencia(aniosMinimos: Int!): [Conductor!]!
+
+  """Obtiene una cotización por ID"""
+  cotizacion(id: String!): Cotizacion
+
+  """Obtiene todas las cotizaciones"""
+  cotizaciones: [Cotizacion!]!
+
+  """Obtiene cotizaciones por estado"""
+  cotizacionesPorEstado(estado: String!): [Cotizacion!]!
+
+  """Obtiene cotizaciones con prima mínima"""
+  cotizacionesPorPrima(primaMinima: Int!): [Cotizacion!]!
+
+  """Calcula la prima total de cotizaciones aprobadas"""
+  primaTotal: Int!
+
+  """Calcula el valor comercial promedio de los vehículos"""
+  valorPromedioVehiculos: Int!
+
+  """Obtiene un vehículo por ID"""
+  vehiculo(id: String!): Vehiculo
+
+  """Obtiene todos los vehículos"""
+  vehiculos: [Vehiculo!]!
+
+  """Obtiene vehículos por año de fabricación mínimo"""
+  vehiculosPorAno(anioMinimo: Int!): [Vehiculo!]!
+
+  """Obtiene vehículos de un conductor"""
+  vehiculosPorConductor(conductorId: String!): [Vehiculo!]!
+}
+
+type Vehiculo {
+  anioFabricacion: Int!
+  color: String!
+  conductorId: String!
+  fechaActualizacion: String!
+  fechaCreacion: String!
+  id: String!
+  marca: String!
+  modelo: String!
+  numeroMotor: String!
+  placa: String!
+  tipo: String!
+  valorComercial: Int!
+  vin: String!
+}
